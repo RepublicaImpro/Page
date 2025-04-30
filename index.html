@@ -96,7 +96,9 @@
         /* Responsive flash card styles */
         .flip-card {
             perspective: 1000px;
-            min-height: 350px; /* Minimum height for small devices */
+            min-height: 350px; /* Altura base */
+            height: 100%; /* Ocupar el espacio disponible */
+            display: flex; /* Asegurar que el contenido se distribuya correctamente */
         }
 
         @media (min-width: 640px) {
@@ -130,6 +132,12 @@
             backface-visibility: hidden;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Permite scroll vertical si el contenido es muy largo */
+            padding: 1.5rem;
+        }
+
+        .flip-card-front {
+            padding: 1.5rem;
         }
 
         .flip-card-back {
@@ -139,7 +147,30 @@
             justify-content: center;
             padding: 1.5rem;
         }
+        
+        .flip-card {
+            perspective: 1000px;
+            min-height: 350px;
+            max-height: 500px; /* Altura máxima */
+        }
 
+        .flip-card-front, .flip-card-back {
+            overflow-y: auto; /* Añadir scroll solo cuando sea necesario */
+            max-height: 100%; /* Limitar al contenedor */
+        }
+
+        /* Mejorar la apariencia del scroll en navegadores modernos */
+        .flip-card-front::-webkit-scrollbar, 
+        .flip-card-back::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .flip-card-front::-webkit-scrollbar-thumb, 
+        .flip-card-back::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
         /* Additional styles for mobile menu */
         .mobile-menu {
             transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
@@ -312,7 +343,7 @@
         <div class="carousel" aria-label="Galería de imágenes destacadas">
             <div class="carousel-inner">
                 <div class="carousel-item active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1603372441486-70b7fb1a870e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 1">
-                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-72">
+                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-96">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Descubre el arte de la improvisación</h2>
                         <p class="text-xl sm:text-2xl md:text-3xl text-blue-600 mb-6 sm:mb-8">Clases, shows y experiencias únicas en Santiago y online</p>
                         <a href="#cursos" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
@@ -322,7 +353,7 @@
                     </div>
                 </div>
                 <div class="carousel-item" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 2">
-                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-72">
+                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-96">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Cartelera de shows</h2>
                         <p class="text-xl sm:text-2xl md:text-3xl text-blue-600 mb-6 sm:mb-8">Disfruta de nuestras presentaciones semanales</p>
                         <a href="#shows" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
@@ -332,7 +363,7 @@
                     </div>
                 </div>
                 <div class="carousel-item" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');" aria-label="Slide 3">
-                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-72">
+                    <div class="text-center px-4 sm:px-6 lg:px-8 mt-96">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-500 mb-4">Quiénes somos</h2>
                         <p class="text-xl sm:text-2xl md:text-3xl text-blue-600 mb-6 sm:mb-8">Descubre nuestra misión y valores</p>
                         <a href="#about" class="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-300 btn-transition">
@@ -367,7 +398,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Nivel 1</h3>
                             <p class="text-gray-600 mb-4">El curso perfecto para iniciarte en la improvisación. Aprenderás los fundamentos y técnicas básicas.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$80.000</p>
                                 <p class="text-sm text-gray-500">Duración: 8 semanas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: 15 de mayo, 2025</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Nivel 1">
@@ -385,6 +415,7 @@
                                 <li>Construcción de escenas</li>
                                 <li>Trabajo en equipo y confianza</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Lunes y miércoles de 19:00 a 21:00</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -405,7 +436,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Nivel 2</h3>
                             <p class="text-gray-600 mb-4">Profundiza en el arte de la improvisación y desarrolla habilidades más avanzadas.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$90.000</p>
                                 <p class="text-sm text-gray-500">Duración: 10 semanas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: 1 de junio, 2025</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Nivel 2">
@@ -423,6 +453,7 @@
                                 <li>Formatos de improvisación</li>
                                 <li>Presencia escénica</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Martes y jueves de 19:00 a 21:30</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -443,7 +474,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Musical</h3>
                             <p class="text-gray-600 mb-4">Aprende a combinar improvisación teatral con elementos musicales para crear experiencias únicas.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$110.000</p>
                                 <p class="text-sm text-gray-500">Duración: 8 semanas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: 10 de junio, 2025</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Musical">
@@ -461,6 +491,7 @@
                                 <li>Ritmo y melodía</li>
                                 <li>Estructura de canciones improvisadas</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Sábados de 10:00 a 14:00</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -481,7 +512,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Nivel 3</h3>
                             <p class="text-gray-600 mb-4">Para improvisadores experimentados. Perfecciona tus habilidades y prepárate para actuar profesionalmente.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$120.000</p>
                                 <p class="text-sm text-gray-500">Duración: 12 semanas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: 5 de julio, 2025</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Nivel 3">
@@ -499,6 +529,7 @@
                                 <li>Trabajo con público y técnicas de interacción</li>
                                 <li>Preparación para shows profesionales</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Lunes y miércoles de 19:30 a 22:00</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -519,7 +550,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Impro Online</h3>
                             <p class="text-gray-600 mb-4">Aprende improvisación desde cualquier lugar. Curso 100% online con sesiones en vivo y contenido bajo demanda.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$70.000</p>
                                 <p class="text-sm text-gray-500">Duración: 8 semanas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: Cada mes</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Impro Online">
@@ -537,6 +567,7 @@
                                 <li>Ejercicios prácticos adaptados al formato online</li>
                                 <li>Comunidad virtual de estudiantes</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Martes y jueves de 20:00 a 21:30</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -557,7 +588,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Taller de Verano</h3>
                             <p class="text-gray-600 mb-4">Sumérgete en la improvisación con nuestro curso intensivo de verano. Una experiencia inmersiva para todos los niveles.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$150.000</p>
                                 <p class="text-sm text-gray-500">Duración: 2 semanas intensivas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: 5 de enero, 2025</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Taller de Verano">
@@ -575,6 +605,7 @@
                                 <li>Módulos especializados por profesores invitados</li>
                                 <li>Material didáctico incluido</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Lunes a viernes de 16:00 a 21:00</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -595,7 +626,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Soundpainting</h3>
                             <p class="text-gray-600 mb-4">Explora la técnica de Soundpainting para dirigir improvisaciones escénicas con gestos musicales y de movimiento.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$80.000</p>
                                 <p class="text-sm text-gray-500">Duración: 6 semanas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: 15 de abril, 2025</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Soundpainting">
@@ -612,6 +642,7 @@
                                 <li>Combina señales sonoras, visuales y corporales</li>
                                 <li>Desarrolla espectáculos improvisados guiados</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Viernes 19:00 - 21:00</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -632,7 +663,6 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Voz y Silencio</h3>
                             <p class="text-gray-600 mb-4">Un viaje a la improvisación a través de la voz, la pausa y la conexión con el silencio.</p>
                             <div class="mt-auto">
-                                <p class="text-2xl font-bold text-gray-900 mb-2">$90.000</p>
                                 <p class="text-sm text-gray-500">Duración: 8 semanas</p>
                                 <p class="text-sm text-gray-500 mb-4">Inicio: 10 de abril, 2025</p>
                                 <button class="flip-card-btn w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 btn-transition" aria-label="Más información sobre Voz y Silencio">
@@ -649,6 +679,7 @@
                                 <li>Ritmo, pausa y escucha activa</li>
                                 <li>Conexión corporal y vocal en escena</li>
                             </ul>
+                            <p class="text-xl font-bold text-gray-500 mb-2">Cuota mensual $48.000</p>
                             <p class="text-sm text-gray-500 mb-4">Horarios: Lunes 18:00 - 20:00</p>
                             <div class="mt-auto">
                                 <a href="#contacto" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 mb-2 btn-transition inline-block text-center">
@@ -1334,7 +1365,59 @@
                     hideSuccessMessage();
                 }
             });
-        });
+            
+            // Función para igualar alturas por fila
+            function equalizeCardHeights() {
+                // Obtener todas las filas del grid
+                const grid = document.querySelector('.grid');
+                    if (!grid) return;
+                    
+                    // Resetear alturas primero
+                    const cards = document.querySelectorAll('.flip-card');
+                    cards.forEach(card => {
+                        card.style.height = 'auto';
+                    });
+                    
+                    // Para cada breakpoint tenemos un número diferente de columnas
+                    // Móvil: 1 columna, Tablet: 2 columnas, Desktop: 3 columnas
+                    let columns = 1;
+                    if (window.innerWidth >= 1024) {
+                        columns = 3;
+                    } else if (window.innerWidth >= 768) {
+                        columns = 2;
+                    }
+                    
+                    // Agrupar tarjetas por fila
+                    for (let i = 0; i < cards.length; i += columns) {
+                        const rowCards = Array.from(cards).slice(i, i + columns);
+                        
+                        // Encontrar la altura máxima en esta fila
+                        let maxHeight = 0;
+                        rowCards.forEach(card => {
+                            // Medimos tanto el frente como el reverso
+                            const frontHeight = card.querySelector('.flip-card-front').scrollHeight;
+                            const backHeight = card.querySelector('.flip-card-back').scrollHeight;
+                            const maxCardHeight = Math.max(frontHeight, backHeight);
+                            
+                            if (maxCardHeight > maxHeight) {
+                                maxHeight = maxCardHeight;
+                            }
+                        });
+                        
+                        // Aplicar la altura máxima a todas las tarjetas de esta fila
+                        rowCards.forEach(card => {
+                            card.style.height = `${maxHeight + 30}px`; // Añadir un poco de margen
+                        });
+                    }
+                }
+                
+                // Ejecutar al cargar y cuando se redimensione la ventana
+                equalizeCardHeights();
+                window.addEventListener('resize', equalizeCardHeights);
+                
+                // También ejecutar después de que se carguen las imágenes
+                window.addEventListener('load', equalizeCardHeights);
+            });
     </script>
 </body>
 </html>
